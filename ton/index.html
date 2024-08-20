@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Telegram H5 and TON Wallet</title>
   <style>
+    body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
     .btn-send {
       background-color: #0098EA;
       color: #FFFFFF;
@@ -72,29 +78,33 @@
     //断开连接
     //await tonConnectUI.disconnect();
 
+    let currentAccount = "";
     //监听钱包状态
     const unsubscribe = tonConnectUI.onStatusChange(
       walletAndwalletInfo => {
-        // update state/reactive variables to show updates in the ui
+        //钱包详细信息
         console.log("walletAndwalletInfo", walletAndwalletInfo);
-        const currentWallet = tonConnectUI.wallet;
-        const currentWalletInfo = tonConnectUI.walletInfo;
-        const currentAccount = tonConnectUI.account;
+        currentAccount = tonConnectUI.account;
         const currentIsConnectedStatus = tonConnectUI.connected;
-        console.log("currentWallet", currentWallet);
-        console.log("currentWalletInfo", currentWalletInfo);
+        //钱包账号
         console.log("currentAccount", currentAccount);
+        //连接状态
         console.log("currentIsConnectedStatus", currentIsConnectedStatus);
       }
     );
 
     //发起交易
     async function sendTransaction() {
+      if(!currentAccount){
+        alert("请连接钱包");
+        return;
+      }
       const transaction = {
         validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
         messages: [
           {
-            address: "0QCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWKNr",
+            address:"UQCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWBjh",
+            //address: "0QCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWKNr",
             amount: "20000000",
             // stateInit: "base64bocblahblahblah==" // just for instance. Replace with your transaction initState or remove
           },
