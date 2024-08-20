@@ -5,6 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Telegram H5 and TON Wallet</title>
+  <style>
+    .btn-send {
+      background-color: #0098EA;
+      color: #FFFFFF;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.16);
+      padding: 8px 16px 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-top:20px;
+      width:160px;
+      height: 40px;
+      border: none;
+      border-radius: 100vh;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 510;
+      line-height: 18px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -12,17 +34,14 @@
   <div id="connectButton"></div>
   <!-- <button onclick="openWallet()">打开</button> -->
 
-   <button onclick="sendTransaction()">发起交易</button>
+  <button class="btn-send" onclick="sendTransaction()">发起交易</button>
 
   <script src="tonconnect-ui.min.js"></script>
   <script>
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
       //应用元信息配置，比如应用的URL、名称、图标URL等，这些信息会被传递给钱包应用，以便在用户与TON钱包进行交互时提供更好的用户体验和一致性
       manifestUrl: 'https://ronsyisme.github.io/ton/tonconnect-manifest.json',
-      buttonRootId: 'connectButton',
-      network: {
-        serverAddress: 'https://testnet.toncenter.com', // 测试链节点地址
-      }
+      buttonRootId: 'connectButton'
     });
     //如果不是以connectButton按钮触发打开，则用以下方式打开钱包
     //await tonConnectUI.openModal();
@@ -55,18 +74,18 @@
 
     //监听钱包状态
     const unsubscribe = tonConnectUI.onStatusChange(
-        walletAndwalletInfo => {
-            // update state/reactive variables to show updates in the ui
-            console.log("walletAndwalletInfo",walletAndwalletInfo);
-            const currentWallet = tonConnectUI.wallet;
-            const currentWalletInfo = tonConnectUI.walletInfo;
-            const currentAccount = tonConnectUI.account;
-            const currentIsConnectedStatus = tonConnectUI.connected;
-            console.log("currentWallet",currentWallet);
-            console.log("currentWalletInfo",currentWalletInfo);
-            console.log("currentAccount",currentAccount);
-            console.log("currentIsConnectedStatus",currentIsConnectedStatus);
-        } 
+      walletAndwalletInfo => {
+        // update state/reactive variables to show updates in the ui
+        console.log("walletAndwalletInfo", walletAndwalletInfo);
+        const currentWallet = tonConnectUI.wallet;
+        const currentWalletInfo = tonConnectUI.walletInfo;
+        const currentAccount = tonConnectUI.account;
+        const currentIsConnectedStatus = tonConnectUI.connected;
+        console.log("currentWallet", currentWallet);
+        console.log("currentWalletInfo", currentWalletInfo);
+        console.log("currentAccount", currentAccount);
+        console.log("currentIsConnectedStatus", currentIsConnectedStatus);
+      }
     );
 
     //发起交易
