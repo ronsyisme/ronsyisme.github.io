@@ -1,8 +1,8 @@
 {
-  "url": "http://192.168.1.48:3100/ton/index.html",
+  "url": "https://ronsyisme.github.io/ton/index.html",
   "name": "Gameland",
-  "iconUrl": "http://192.168.1.48:3100/ton/logo.png",
-  "termsOfUseUrl": "http://192.168.1.48:3100/ton/terms-of-use.html",
-  "privacyPolicyUrl": "http://192.168.1.48:3100/ton/privacy-policy.html",
+  "iconUrl": "https://ronsyisme.github.io/ton/logo.png",
+  "termsOfUseUrl": "https://ronsyisme.github.io/ton/terms-of-use.html",
+  "privacyPolicyUrl": "https://ronsyisme.github.io/ton/privacy-policy.html",
   "network": "testnet"
 }
