@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram H5 and TON Wallet</title>
+</head>
+
+<body>
+  <h1>Connect TON Wallet</h1>
+  <div id="connectButton"></div>
+  <!-- <button onclick="openWallet()">打开</button> -->
+
+   <button onclick="sendTransaction()">发起交易</button>
+
+  <script src="tonconnect-ui.min.js"></script>
+  <script>
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+      //应用元信息配置，比如应用的URL、名称、图标URL等，这些信息会被传递给钱包应用，以便在用户与TON钱包进行交互时提供更好的用户体验和一致性
+      manifestUrl: 'http://192.168.1.48:3100/ton/tonconnect-manifest.json',
+      buttonRootId: 'connectButton',
+      network: {
+        serverAddress: 'https://testnet.toncenter.com', // 测试链节点地址
+      }
+    });
+    //如果不是以connectButton按钮触发打开，则用以下方式打开钱包
+    //await tonConnectUI.openModal();
+    //tonConnectUI.closeModal();
+    // function openWallet(){
+    //   tonConnectUI.openModal()
+    //   .then(() => {
+    //       console.log('Modal window opened successfully.');
+    //   })
+    //   .catch(error => {
+    //       console.error('Error opening modal window:', error);
+    //   });
+    // }
+    //钱包列表
+    // (async function(){
+    //   const walletsList = await tonConnectUI.getWallets();
+    //   console.log(walletsList);
+    // })();
+    //钱包初始配置，语言、主题色等
+    // tonConnectUI.uiOptions = {
+    //     language: 'en',
+    //     uiPreferences: {
+    //         theme: TON_CONNECT_UI.THEME.DARK
+    //     },
+    //     twaReturnUrl: 'https://t.me/YOUR_APP_NAME'
+    // };
+
+    //断开连接
+    //await tonConnectUI.disconnect();
+
+    //监听钱包状态
+    const unsubscribe = tonConnectUI.onStatusChange(
+        walletAndwalletInfo => {
+            // update state/reactive variables to show updates in the ui
+            console.log("walletAndwalletInfo",walletAndwalletInfo);
+            const currentWallet = tonConnectUI.wallet;
+            const currentWalletInfo = tonConnectUI.walletInfo;
+            const currentAccount = tonConnectUI.account;
+            const currentIsConnectedStatus = tonConnectUI.connected;
+            console.log("currentWallet",currentWallet);
+            console.log("currentWalletInfo",currentWalletInfo);
+            console.log("currentAccount",currentAccount);
+            console.log("currentIsConnectedStatus",currentIsConnectedStatus);
+        } 
+    );
+
+    //发起交易
+    async function sendTransaction() {
+      const transaction = {
+        validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
+        messages: [
+          {
+            address: "0QCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWKNr",
+            amount: "20000000",
+            // stateInit: "base64bocblahblahblah==" // just for instance. Replace with your transaction initState or remove
+          },
+          // {
+          //   address: "EQDmnxDMhId6v1Ofg_h5KR5coWlFG6e86Ro3pc7Tq4CA0-Jn",
+          //   amount: "60000000",
+          //   // payload: "base64bocblahblahblah==" // just for instance. Replace with your transaction payload or remove
+          // }
+        ]
+      }
+      try {
+        const result = await tonConnectUI.sendTransaction(transaction);
+        console.log(result);
+        // you can use signed boc to find the transaction 
+        // const someTxData = await myAppExplorerService.getTransaction(result.boc);
+        // alert('Transaction was sent successfully', someTxData);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  </script>
+</body>
+
+</html>
