@@ -39,11 +39,15 @@
   <h1>Connect TON Wallet</h1>
   <div id="connectButton"></div>
   <!-- <button onclick="openWallet()">打开</button> -->
+   <div id="url"></div>
 
   <button class="btn-send" onclick="sendTransaction()">发起交易</button>
 
   <script src="tonconnect-ui.min.js"></script>
   <script>
+    window.onload = function(){
+      document.getElementById("url").innerText = document.URL;
+    }
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
       //应用元信息配置，比如应用的URL、名称、图标URL等，这些信息会被传递给钱包应用，以便在用户与TON钱包进行交互时提供更好的用户体验和一致性
       manifestUrl: 'https://ronsyisme.github.io/ton/tonconnect-manifest.json',
@@ -103,16 +107,11 @@
         validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
         messages: [
           {
-            address:"UQCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWBjh",
+            address:"UQCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWBjh", //接收地址
             //address: "0QCLjgB5D8IRlHN1zpgdKJA0FSnN_vkuRGo2-sFAGERpWKNr",
             amount: "20000000",
             // stateInit: "base64bocblahblahblah==" // just for instance. Replace with your transaction initState or remove
-          },
-          // {
-          //   address: "EQDmnxDMhId6v1Ofg_h5KR5coWlFG6e86Ro3pc7Tq4CA0-Jn",
-          //   amount: "60000000",
-          //   // payload: "base64bocblahblahblah==" // just for instance. Replace with your transaction payload or remove
-          // }
+          }
         ]
       }
       try {
