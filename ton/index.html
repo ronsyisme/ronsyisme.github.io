@@ -12,38 +12,22 @@
       justify-content: center;
       align-items: center;
     }
-    .btn-send {
-      background-color: #0098EA;
-      color: #FFFFFF;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.16);
-      padding: 8px 16px 8px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      margin-top:20px;
-      width:160px;
-      height: 40px;
-      border: none;
-      border-radius: 100vh;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 510;
-      line-height: 18px;
-      font-weight: bold;
-    }
   </style>
 </head>
 
 <body>
-  <h1>Connect TON Wallet</h1>
-  <div id="connectButton"></div>
+  <button id="connectBtn">链接Ton钱包</button>
   <!-- <button onclick="openWallet()">打开</button> -->
-   <div id="url"></div>
+   <!-- <div id="url"></div> -->
 
-  <button class="btn-send" onclick="sendTransaction()">发起交易</button>
-
-  <script src="tonconnect-ui.min.js"></script>
+  <!-- <button class="btn-send" onclick="sendTransaction()">发起交易</button> -->
+  <script type="module" src="connect-wallet.js"></script>
+  <script>
+    document.getElementById("connectBtn").addEventListener("click", function(){
+      window.CONNECT_WALLET.connectTon();
+    });
+  </script>
+  <!-- <script src="tonconnect-ui.min.js"></script>
   <script>
     window.onload = function(){
       document.getElementById("url").innerText = document.URL;
@@ -124,7 +108,7 @@
         console.error(e);
       }
     }
-  </script>
+  </script> -->
 </body>
 
 </html>
