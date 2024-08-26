@@ -1,0 +1,32 @@
+{
+  "name": "vue3-temp",
+  "short_name": "vue3",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0c0c0c",
+  "theme_color": "#0c0c0c",
+  "icons": [
+    {
+      "src": "/pwa/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "description": "vue3-temp模板，一键安装到桌面",
+  "lang": "en",
+  "screenshots": [
+    {
+      "src": "/pwa/sh-m.jpg",
+      "type": "image/jpeg",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/pwa/screenshots.jpg",
+      "type": "image/jpeg",
+      "sizes": "1355x911",
+      "form_factor": "wide"
+    }
+  ]
+}
