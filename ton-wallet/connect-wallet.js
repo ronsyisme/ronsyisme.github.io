@@ -1,24 +1,28 @@
 import './res/js/tonconnect-ui.min.js'
 
 window.TON_WALLET = (() => {
-  let currentAccount = "";
-  const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-    manifestUrl: 'https://ronsyisme.github.io/ton/res/tonconnect-manifest.json',
-    buttonRootId: 'connectButton'
-  });
-  //监听连接状态
-  tonConnectUI.onStatusChange(
-    walletAndwalletInfo => {
-      //钱包详细信息
-      console.log("walletAndwalletInfo", walletAndwalletInfo);
-      currentAccount = tonConnectUI.account;
-      const currentIsConnectedStatus = tonConnectUI.connected;
-      //钱包账号
-      console.log("currentAccount", currentAccount);
-      //连接状态
-      console.log("currentIsConnectedStatus", currentIsConnectedStatus);
-    }
-  );
+  let tonConnectUI = null;
+  //初始化
+  const init = () => { 
+    tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+      manifestUrl: 'https://ronsyisme.github.io/ton-wallet/res/tonconnect-manifest.json',
+      buttonRootId: 'connectButton'
+    });
+    //监听连接状态
+    tonConnectUI.onStatusChange(
+      walletAndwalletInfo => {
+        //钱包详细信息
+        console.log("walletAndwalletInfo", walletAndwalletInfo);
+        const currentAccount = tonConnectUI.account;
+        const currentIsConnectedStatus = tonConnectUI.connected;
+        //钱包账号
+        console.log("currentAccount", currentAccount);
+        //连接状态
+        console.log("currentIsConnectedStatus", currentIsConnectedStatus);
+      }
+    )
+  }
+  
   //发起交易
   const sendTransaction = async (targetAddress, amount) => {
     if (!tonConnectUI.connected) {
@@ -49,7 +53,7 @@ window.TON_WALLET = (() => {
   const disconnectTon = () => {
     tonConnectUI.disconnect();
   }
-  return { connectTon, disconnectTon, sendTransaction }
+  return { init, connectTon, disconnectTon, sendTransaction }
 })();
 
 
