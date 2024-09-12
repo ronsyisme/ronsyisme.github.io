@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Ton</title>
     <script type="module" crossorigin src="/ton/static/ton-thunk.js"></script>
   </head>
   <body>
@@ -13,6 +13,8 @@
       <button onclick="disconnect()">断开连接</button>
       <button onclick="send()">发送交易</button>
       <button onclick="transfer()">Ton转换</button>
+      <button onclick="query()">状态</button>
+      <div id="content" style="width:100%;word-break: break-all;"></div>
     </div>
 
     <script>
@@ -31,6 +33,9 @@
       }
       function transfer(){
         console.log("nanoTon",window.TON_WALLET.toNano(window.TON_WALLET.balance));
+      }
+      function query(){
+        document.getElementById("content").innerHTML = JSON.stringify(window.TON_WALLET);
       }
     </script>
   </body>
